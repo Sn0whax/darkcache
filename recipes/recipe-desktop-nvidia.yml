@@ -16,6 +16,8 @@ modules:
     files:
       - source: system-desktop
         destination: /
+      - source: system-desktop-nvidia
+        destination: /
       - source: common
         destination: /
 
@@ -52,7 +54,6 @@ modules:
         - obs-studio
         - audacious
         - kate
-        - steam
 
   # Expose audio group to users
   - type: script
