@@ -63,23 +63,27 @@ DarkCache includes additional software and enhancements such as:
 - obs-studio
 - audacious
 - kate
-- steam\
+- steam
 
 ### Removed Packages
 
-To keep the image focused and reduce unnecessary clutter, several default packages are removed:
+To keep DarkCache focused and reduce unnecessary clutter, the following packages are removed from all variants:
 
-- firefox
-- firefox-langpacks
-- htop
-- nvtop
-- toolbox
-- kmahjongg
-- kmines
-- dragon
-- elisa-player
-- khelpcenter
-- kwrite
+- Firefox and Firefox language packs — replaced by Brave Origin
+- Htop — replaced by Btop
+- Toolbox — DarkCache uses a Distrobox-first workflow
+- KolourPaint
+- Skanpage
+- KRDC
+- KRFB
+- KMahjongg
+- KMines
+- Dragon Player — replaced by Haruna
+- Elisa — replaced by Audacious
+- KHelpCenter
+- KWrite — replaced by Kate
+- Unnecessary GNOME applications and GNOME-specific components
+- Redundant utilities replaced by DarkCache preferred applications
 
 ### Desktop Customizations
 
@@ -165,12 +169,13 @@ cosign verify --key cosign.pub ghcr.io/sn0whax/darkcache-desktop
 ## Why DarkCache?
 
 - KDE Plasma-first experience
+- SELinux Security
 - CachyOS performance enhancements
 - NVIDIA-ready desktop images
 - Atomic reliability powered by BlueBuild
 - Beautiful themes and visual customization
 - Curated package selection without unnecessary bloat
-- Built for gaming, development, and everyday use
+- Built for gaming and everyday use
 - Distrobox-first workflow
 - Sensible defaults with room for customization
 
