@@ -1,11 +1,16 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: silvercachy-laptop
-description: Silverblue image based on BlueBuild's base images with CachyOS kernel (Laptop)
-base-image: ghcr.io/blue-build/base-images/fedora-silverblue
+name: darkcache-laptop
+description: Fedora Kinoite image based on BlueBuild's base images with CachyOS kernel (Laptop)
+base-image: ghcr.io/blue-build/base-images/fedora-kinoite
 image-version: 43
 
 modules:
+  # Install KDE themes
+  - type: script
+    scripts:
+      - install-kde-themes.sh
+
   # Copy necessary system files
   - type: files
     files:
@@ -16,6 +21,11 @@ modules:
 
   # Minimal base image without extra GUI or CLI tools
   - type: dnf
+    repos:
+      cleanup: true
+      copr:
+        - faugus/faugus-launcher
+        - ilyaz/LACT
     remove:
       auto-remove: true
       packages:
@@ -23,32 +33,32 @@ modules:
         - firefox-langpacks
         - htop
         - nvtop
-        - gnome-software
-        - gnome-tour
-        - ptyxis
-        - gnome-system-monitor
-        - malcontent-control
-        - gnome-disk-utility
-        - gnome-color-manager
-        - yelp
-        - pipewire-config-raop
-        - gnome-shell-extension-background-logo
         - toolbox
-        - ibus-typing-booster
+        - kmahjongg
+        - kmines
+        - dragon
+        - elisa-player
+        - khelpcenter
+        - kwrite
+
     install:
       skip-unavailable: true
       packages:
-        - adw-gtk3-theme
-
-  # AppIndicator and KStatusNotifierItem Support
-  - type: gnome-extensions
-    install:
-      - 615 
+        - gamemode
+        - btop
+        - brave-origin
+        - faugus-launcher
+        - lact
+        - haruna
+        - obs-studio
+        - audacious
+        - kate
+        - steam
 
   # Cachyos kernel
   - type: custom-kernel
     source: local
-    kernel: cachyos-lto
+    kernel: cachyos
     initramfs: true
     sign: 
       key: /tmp/certs/MOK.priv
@@ -81,6 +91,7 @@ modules:
   - type: systemd
     system:
       enabled:
+        - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
         - flatpak-firstboot.service     # installs the default flatpaks
         - scx_loader.service            # enables scxsched
@@ -88,10 +99,10 @@ modules:
   # Set OS name
   - type: os-release
     properties:
-      DEFAULT_HOSTNAME: silvercachy
-      ID: silvercachy
+      DEFAULT_HOSTNAME: darkcache
+      ID: darkcache
       ID_LIKE: fedora
-      NAME: SilverCachy
-      PRETTY_NAME: SilverCachy - Fedora Silverblue with CachyOS Kernel (Laptop)
+      NAME: DarkCache
+      PRETTY_NAME: DarkCache - Fedora Silverblue with CachyOS Kernel (Laptop)
 
   - type: signing

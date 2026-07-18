@@ -19,9 +19,9 @@ model CustomKernelModuleV1 {
    * Kernel variant to install.
    * Currently only CachyOS kernels are supported.
    *
-   * @default "cachyos-lto"
+   * @default "cachyos"
    */
-  kernel?: "cachyos-lto";
+  kernel?: "cachyos";
 
   /**
    * Whether to generate an initramfs for the installed kernel.

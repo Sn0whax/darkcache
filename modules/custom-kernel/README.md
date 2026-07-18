@@ -18,7 +18,7 @@ The custom-kernel module is configured using the following options.
 ### `kernel`
 
 The `kernel` field selects the CachyOS kernel variant to install.  
-If not specified, the default value `cachyos-lto` is used.
+If not specified, the default value `cachyos` is used.
 
 Supported values include:
 
@@ -66,7 +66,7 @@ The `mok-password` field specifies the password used during MOK enrollment on fi
 
 ```yaml
 type: custom-kernel
-kernel: cachyos-lto
+kernel: cachyos
 initramfs: true
 nvidia: true
 sign:
