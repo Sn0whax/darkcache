@@ -106,9 +106,35 @@ Unlike minimal Atomic images, DarkCache ships with a carefully selected collecti
 2. Boot into a Fedora Atomic-based distribution.
 3. Switch to the latest DarkCache image:
 
+
+#### Standard desktop
+
+For desktop systems using AMD or Intel graphics:
+
 ```bash
 bootc switch ghcr.io/sn0whax/darkcache-desktop:latest
 ```
+
+#### NVIDIA desktop
+
+For desktop systems using NVIDIA graphics:
+
+```bash
+bootc switch ghcr.io/sn0whax/darkcache-desktop-nvidia:latest
+```
+
+This variant includes NVIDIA drivers built for the CachyOS kernel. Steam is installed as a Flatpak to avoid NVIDIA multilib package conflicts.
+
+#### Laptop
+
+For laptops and portable systems:
+
+```bash
+bootc switch ghcr.io/sn0whax/darkcache-laptop:latest
+```
+
+This variant includes laptop-specific power management, suspend behavior, and scheduler tuning.
+
 
 4. Reboot your system:
 
