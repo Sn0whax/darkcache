@@ -1,18 +1,18 @@
 # DarkCache
 
-**DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and heavily customized **KDE Plasma** experience.
+**DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and highly customized **KDE Plasma** experience.
 
-Built on Fedora Atomic technologies and enhanced with the **CachyOS kernel**, DarkCache combines performance-focused optimizations, useful desktop enhancements, curated packages, and a polished Plasma setup out of the box.
+Built on Fedora Atomic technologies and powered by the **CachyOS kernel**, DarkCache combines performance-focused optimizations, useful desktop enhancements, curated packages, and a polished Plasma environment out of the box.
 
 ## Variants
 
 ### darkcache-desktop
 
-Designed for desktop systems, gaming rigs, and workstations.
+Designed for desktops, gaming systems, and workstations.
 
 - NVIDIA drivers included and configured
 - CachyOS kernel and performance optimizations
-- KDE Plasma with curated themes and desktop enhancements
+- KDE Plasma with custom themes and desktop enhancements
 - Additional quality-of-life applications and utilities
 
 ### darkcache-laptop
@@ -20,23 +20,63 @@ Designed for desktop systems, gaming rigs, and workstations.
 Optimized for laptops and portable devices.
 
 - Uses the `scx_bpfland` scheduler in power-saving mode by default
-- Laptop-specific power management improvements
+- Improved battery life and responsiveness
 - Better suspend and docked-device behavior
-- Same KDE Plasma experience with battery-focused tuning
+- Same KDE Plasma experience with laptop-specific tuning
+
+## What's Included
+
+DarkCache provides a curated desktop experience instead of a completely minimal setup. The goal is to deliver a polished Plasma environment that's ready for daily use immediately after installation.
+
+### Added Packages
+
+DarkCache includes additional software and enhancements such as:
+
+- KDE Plasma Desktop
+- CachyOS Kernel
+- NVIDIA Drivers (desktop variant)
+- Distrobox
+- Fastfetch
+- KDE Connect
+- Flatpak Support
+- Flathub Integration
+- Additional Hardware Support Packages
+- Performance Tuning Utilities
+- Plasma Themes
+- Custom Icon Themes
+- Custom Cursor Themes
+- Custom SDDM Theme
+- Additional KDE Utilities and Enhancements
+
+### Removed Packages
+
+To keep the image focused and reduce unnecessary clutter, several default packages are removed:
+
+- Toolbox
+- Unnecessary GNOME applications
+- GNOME-specific desktop components
+- Redundant utilities already replaced by better alternatives
+- Other packages not relevant to a KDE Plasma workflow
+
+### Desktop Customizations
+
+DarkCache comes preconfigured with:
+
+- Custom Plasma theme
+- Custom icon theme
+- Custom cursor theme
+- Custom SDDM login theme
+- Improved panel layout
+- Sensible KDE defaults
+- Performance-oriented system tuning
+- NVIDIA support on desktop images
+- Laptop-focused power management on laptop images
 
 ## Philosophy
 
-DarkCache aims to provide a comfortable and visually appealing Plasma desktop while embracing the reliability and simplicity of Atomic desktops.
+DarkCache aims to deliver a complete KDE Plasma experience while preserving the reliability and simplicity of Fedora Atomic desktops.
 
-Included by default:
-
-- KDE Plasma desktop
-- Curated themes, icons, and appearance tweaks
-- CachyOS kernel and system optimizations
-- Useful desktop applications and utilities
-- Distrobox for development and containerized workflows
-
-Unlike minimal Atomic images, DarkCache ships with a carefully selected set of packages and customizations so you can get started immediately after installation.
+Unlike minimal Atomic images, DarkCache ships with a carefully selected collection of applications, themes, and customizations so users can start working, gaming, or developing immediately without spending hours setting up their environment.
 
 ## Installation
 
@@ -81,7 +121,9 @@ cosign verify --key cosign.pub ghcr.io/sn0whax/darkcache-desktop
 - Atomic reliability powered by BlueBuild
 - Beautiful themes and visual customization
 - Curated package selection without unnecessary bloat
-- Great for gaming, development, and everyday use
+- Built for gaming, development, and everyday use
+- Distrobox-first workflow
+- Sensible defaults with room for customization
 
 ---
 

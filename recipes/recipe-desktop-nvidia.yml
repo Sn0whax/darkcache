@@ -1,21 +1,33 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: silvercachy-desktop-nvidia
-description: Silverblue image based on BlueBuild's base images with CachyOS kernel and Nvidia (Desktop)
-base-image: ghcr.io/blue-build/base-images/fedora-silverblue
-image-version: 43
+name: darkcache-desktop-nvidia
+description: Fedora Kinoite image based on BlueBuild's base images with CachyOS kernel and Nvidia (Desktop)
+base-image: ghcr.io/blue-build/base-images/fedora-kinoite
+image-version: 44
 
 modules:
+  # Install KDE themes
+  - type: script
+    scripts:
+      - install-kde-themes.sh
+
   # Copy necessary system files
   - type: files
     files:
       - source: system-desktop
+        destination: /
+      - source: system-desktop-nvidia
         destination: /
       - source: common
         destination: /
 
   # Set up the base image apps/tools
   - type: dnf
+    repos:
+      cleanup: true
+      copr:
+        - faugus/faugus-launcher
+        - ilyaz/LACT
     remove:
       auto-remove: true
       packages:
@@ -23,28 +35,25 @@ modules:
         - firefox-langpacks
         - htop
         - nvtop
-        - gnome-software
-        - gnome-tour
-        - ptyxis
-        - gnome-system-monitor
-        - malcontent-control
-        - gnome-disk-utility
-        - gnome-color-manager
-        - yelp
-        - pipewire-config-raop
-        - gnome-shell-extension-background-logo
         - toolbox
-        - ibus-typing-booster
+        - kmahjongg
+        - kmines
+        - dragon
+        - elisa-player
+        - khelpcenter
+        - kwrite
     install:
       skip-unavailable: true
       packages:
         - gamemode
-        - adw-gtk3-theme
-
-  # Install AppIndicator and KStatusNotifierItem Gnome Shell extension
-  - type: gnome-extensions
-    install:
-      - 615 
+        - btop
+        - brave-origin
+        - faugus-launcher
+        - lact
+        - haruna
+        - obs-studio
+        - audacious
+        - kate
 
   # Expose audio group to users
   - type: script
@@ -54,13 +63,13 @@ modules:
   # Cachyos kernel
   - type: custom-kernel
     source: local
-    kernel: cachyos-lto
+    kernel: cachyos
     initramfs: true
     nvidia: true
     sign: 
       key: /tmp/certs/MOK.priv
       cert: /usr/share/cert/MOK.pem
-      mok-password: scachy
+      mok-password: darkcache
     secrets:
     - type: file
       source: ./MOK.priv
@@ -88,17 +97,18 @@ modules:
   - type: systemd
     system:
       enabled:
+        - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
         - flatpak-firstboot.service     # installs the default flatpaks
 
   # Set OS name
   - type: os-release
     properties:
-      DEFAULT_HOSTNAME: silvercachy
-      ID: silvercachy
+      DEFAULT_HOSTNAME: darkcache
+      ID: darkcache
       ID_LIKE: fedora
-      NAME: SilverCachy
-      PRETTY_NAME: SilverCachy - Fedora Silverblue with CachyOS Kernel (Desktop)
+      NAME: DarkCache
+      PRETTY_NAME: DarkCache - Fedora Silverblue with CachyOS Kernel (Desktop)
 
   # Sign container image
   - type: signing

@@ -19,7 +19,7 @@ error() {
 log "Starting custom-kernel module..."
 
 # Read configuration from the first argument ($1) using jq
-KERNEL_TYPE=$(echo "$1" | jq -r '.kernel // "cachyos-lto"')
+KERNEL_TYPE=$(echo "$1" | jq -r '.kernel // "cachyos"')
 INITRAMFS=$(echo "$1" | jq -r '.initramfs // false')
 NVIDIA=$(echo "$1" | jq -r '.nvidia // false')
 SIGNING_KEY=$(echo "$1" | jq -r '.sign.key // ""')
