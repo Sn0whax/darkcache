@@ -262,6 +262,12 @@ if [[ ${NVIDIA} == true ]]; then
     log "Restoring akmodsbuild script."
     restore_akmodsbuild
 
+    log "Removing incompatible i686 Nvidia libraries."
+    dnf remove -y \
+        'libnvidia-*.i686' \
+        'nvidia-driver-*.i686' \
+        || true
+
     log "Installing Nvidia userspace packages."
     dnf install -y --setopt=skip_unavailable=1 \
         libva-nvidia-driver \
