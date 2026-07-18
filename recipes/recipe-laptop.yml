@@ -63,7 +63,7 @@ modules:
     sign: 
       key: /tmp/certs/MOK.priv
       cert: /usr/share/cert/MOK.pem
-      mok-password: scachy
+      mok-password: darkcache
     secrets:
     - type: file
       source: ./MOK.priv

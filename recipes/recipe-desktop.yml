@@ -26,7 +26,7 @@ modules:
       copr:
         - faugus/faugus-launcher
         - ilyaz/LACT
-remove:
+    remove:
       auto-remove: true
       packages:
         - firefox
@@ -68,7 +68,7 @@ remove:
     sign: 
       key: /tmp/certs/MOK.priv
       cert: /usr/share/cert/MOK.pem
-      mok-password: scachy
+      mok-password: darkcache
     secrets:
     - type: file
       source: ./MOK.priv
