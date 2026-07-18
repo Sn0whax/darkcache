@@ -54,31 +54,32 @@ DarkCache provides a curated desktop experience instead of a completely minimal 
 
 DarkCache includes additional software and enhancements such as:
 
-- KDE Plasma Desktop
-- CachyOS Kernel
-- NVIDIA Drivers (desktop variant)
-- Distrobox
-- Fastfetch
-- KDE Connect
-- Flatpak Support
-- Flathub Integration
-- Additional Hardware Support Packages
-- Performance Tuning Utilities
-- Plasma Themes
-- Custom Icon Themes
-- Custom Cursor Themes
-- Custom SDDM Theme
-- Additional KDE Utilities and Enhancements
+- gamemode
+- btop
+- brave-origin
+- faugus-launcher
+- lact
+- haruna
+- obs-studio
+- audacious
+- kate
+- steam\
 
 ### Removed Packages
 
 To keep the image focused and reduce unnecessary clutter, several default packages are removed:
 
-- Toolbox
-- Unnecessary GNOME applications
-- GNOME-specific desktop components
-- Redundant utilities already replaced by better alternatives
-- Other packages not relevant to a KDE Plasma workflow
+- firefox
+- firefox-langpacks
+- htop
+- nvtop
+- toolbox
+- kmahjongg
+- kmines
+- dragon
+- elisa-player
+- khelpcenter
+- kwrite
 
 ### Desktop Customizations
 
@@ -98,7 +99,7 @@ DarkCache comes preconfigured with:
 
 DarkCache aims to deliver a complete KDE Plasma experience while preserving the reliability and simplicity of Fedora Atomic desktops.
 
-Unlike minimal Atomic images, DarkCache ships with a carefully selected collection of applications, themes, and customizations so users can start working, gaming, or developing immediately without spending hours setting up their environment.
+Unlike minimal Atomic images, DarkCache ships with a carefully selected collection of applications, themes, and customizations so users can start working, or gaming immediately without spending hours setting up their environment.
 
 ## Installation
 
