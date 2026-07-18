@@ -15,11 +15,24 @@ Built on Fedora Atomic technologies and powered by the **CachyOS kernel**, DarkC
 
 ### darkcache-desktop
 
-Designed for desktops, gaming systems, and workstations.
+Designed for desktops, gaming systems, and workstations using AMD or Intel graphics.
 
-- NVIDIA drivers included and configured
 - CachyOS kernel and performance optimizations
 - KDE Plasma with custom themes and desktop enhancements
+- Native Steam installation
+- Additional quality-of-life applications and utilities
+- Suitable for AMD and Intel graphics systems
+
+### darkcache-desktop-nvidia
+
+Designed for desktops, gaming systems, and workstations using NVIDIA graphics.
+
+- NVIDIA drivers built for the CachyOS kernel
+- NVIDIA kernel modules signed for Secure Boot
+- CachyOS kernel and performance optimizations
+- KDE Plasma with custom themes and desktop enhancements
+- Steam installed as a Flatpak to avoid host-level NVIDIA multilib conflicts
+- NVIDIA Container Toolkit integration
 - Additional quality-of-life applications and utilities
 
 ### darkcache-laptop
@@ -29,6 +42,8 @@ Optimized for laptops and portable devices.
 - Uses the `scx_bpfland` scheduler in power-saving mode by default
 - Improved battery life and responsiveness
 - Better suspend and docked-device behavior
+- CachyOS kernel and performance optimizations
+- Native Steam installation
 - Same KDE Plasma experience with laptop-specific tuning
 
 ## What's Included
