@@ -234,6 +234,13 @@ if [[ ${NVIDIA} == true ]]; then
         nvidia-kmod-common \
         nvidia-modprobe \
         gcc-c++
+    log "Restoring temporary directory permissions for akmods."
+    install -d -m 1777 /tmp /var/tmp
+    chmod 1777 /tmp /var/tmp
+
+    log "Clearing stale Nvidia akmods failure logs."
+    find /var/cache/akmods/nvidia -type f -name "*.failed.log" -delete 2>/dev/null || true
+
     akmods --force --verbose --kernels "${KERNEL_VERSION}" --kmod "nvidia"
     
     # akmods always fails with exit 0 so we have to check explicitly
