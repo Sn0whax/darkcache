@@ -1,4 +1,11 @@
+<div align="center">
+
 # DarkCache
+
+<img src="DarkCache.jpeg" alt="DarkCache icon" width="220">
+
+</div>
+
 
 **DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and highly customized **KDE Plasma** experience.
 
