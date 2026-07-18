@@ -273,11 +273,6 @@ if [[ ${NVIDIA} == true ]]; then
         libnvidia-fbc \
         libnvidia-ml \
         libnvidia-gpucomp \
-        nvidia-driver-libs.i686 \
-        nvidia-driver-cuda-libs.i686 \
-        libnvidia-fbc.i686 \
-        libnvidia-ml.i686 \
-        libnvidia-gpucomp.i686 \
         nvidia-container-toolkit
 
     log "Cleaning Nvidia repositories."
