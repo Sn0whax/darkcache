@@ -1,78 +1,88 @@
-DarkCache
+# DarkCache
 
-DarkCache is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and heavily customized KDE Plasma experience.
+**DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and heavily customized **KDE Plasma** experience.
 
-Built on Fedora Atomic technologies and enhanced with the CachyOS kernel, DarkCache combines performance-focused optimizations, useful desktop enhancements, carefully selected packages, and a polished Plasma setup out of the box.
+Built on Fedora Atomic technologies and enhanced with the **CachyOS kernel**, DarkCache combines performance-focused optimizations, useful desktop enhancements, curated packages, and a polished Plasma setup out of the box.
 
-Variants
-darkcache-desktop
+## Variants
 
-Designed for desktop systems and gaming rigs.
+### darkcache-desktop
 
-NVIDIA drivers included and configured
-CachyOS kernel and performance optimizations
-KDE Plasma with curated themes and desktop enhancements
-Additional quality-of-life applications and utilities
-darkcache-laptop
+Designed for desktop systems, gaming rigs, and workstations.
 
-Optimized for portable devices and battery life.
+- NVIDIA drivers included and configured
+- CachyOS kernel and performance optimizations
+- KDE Plasma with curated themes and desktop enhancements
+- Additional quality-of-life applications and utilities
 
-Uses the scx_bpfland scheduler in power-saving mode by default
-Laptop-specific power and suspend improvements
-Better behavior when docked or connected to external displays
-Same KDE Plasma experience with mobile-focused optimizations
-Philosophy
+### darkcache-laptop
 
-DarkCache aims to provide a comfortable and visually appealing Plasma desktop while still embracing the Atomic desktop model.
+Optimized for laptops and portable devices.
+
+- Uses the `scx_bpfland` scheduler in power-saving mode by default
+- Laptop-specific power management improvements
+- Better suspend and docked-device behavior
+- Same KDE Plasma experience with battery-focused tuning
+
+## Philosophy
+
+DarkCache aims to provide a comfortable and visually appealing Plasma desktop while embracing the reliability and simplicity of Atomic desktops.
 
 Included by default:
 
-KDE Plasma desktop
-Curated themes, icons, and appearance tweaks
-Performance-focused kernel and system optimizations
-Useful desktop applications and utilities
-Distrobox for containerized development environments
+- KDE Plasma desktop
+- Curated themes, icons, and appearance tweaks
+- CachyOS kernel and system optimizations
+- Useful desktop applications and utilities
+- Distrobox for development and containerized workflows
 
-Unlike minimal Atomic images, DarkCache comes with a thoughtfully selected set of packages and customizations so users can be productive immediately after installation.
+Unlike minimal Atomic images, DarkCache ships with a carefully selected set of packages and customizations so you can get started immediately after installation.
 
-Installation
-Disable Secure Boot in your system firmware (BIOS/UEFI).
-Boot into a Fedora Atomic-based distribution.
-Switch to the latest DarkCache image:
-Shell
+## Installation
+
+1. Disable **Secure Boot** in your BIOS/UEFI.
+2. Boot into a Fedora Atomic-based distribution.
+3. Switch to the latest DarkCache image:
+
+```bash
 bootc switch ghcr.io/sn0whax/darkcache-desktop:latest
+```
 
-Show more lines
-Reboot:
-Shell
+4. Reboot your system:
+
+```bash
 systemctl reboot
+```
 
-Show more lines
-If prompted, enroll the MOK key during boot.
-Re-enable Secure Boot if desired.
-Updates
+5. If prompted, enroll the MOK key during boot.
+6. Re-enable Secure Boot if desired.
 
-The latest tag always points to the newest DarkCache build.
+## Updates
 
-DarkCache follows the Fedora release version specified in its build recipe, ensuring you won't be unexpectedly upgraded to a newer Fedora major release without explicitly choosing to do so.
+The `latest` tag always points to the newest DarkCache build.
 
-Verification
+DarkCache follows the Fedora release version defined in its build recipe, ensuring you won't be unexpectedly upgraded to a new Fedora major release without explicitly choosing to do so.
 
-DarkCache images are signed using Sigstore Cosign.
+## Verification
 
-To verify an image signature, download the cosign.pub key from this repository and run:
+DarkCache images are signed using **Sigstore Cosign**.
 
-Shell
+To verify an image signature, download the `cosign.pub` key from this repository and run:
+
+```bash
 cosign verify --key cosign.pub ghcr.io/sn0whax/darkcache-desktop
+```
 
-Show more lines
-Why DarkCache?
-KDE Plasma-first experience
-CachyOS performance enhancements
-NVIDIA-ready desktop images
-Atomic reliability with BlueBuild
-Beautiful themes and desktop customization
-Preselected packages that make sense without unnecessary bloat
-Ideal for gaming, development, and everyday computing
+## Why DarkCache?
 
-DarkCache brings together Fedora Atomic stability, CachyOS performance, and a polished KDE Plasma experience in one image.
+- KDE Plasma-first experience
+- CachyOS performance enhancements
+- NVIDIA-ready desktop images
+- Atomic reliability powered by BlueBuild
+- Beautiful themes and visual customization
+- Curated package selection without unnecessary bloat
+- Great for gaming, development, and everyday use
+
+---
+
+**DarkCache brings together Fedora Atomic stability, CachyOS performance, and a polished KDE Plasma experience in a single image.**
