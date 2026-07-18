@@ -15,22 +15,19 @@ git clone \
 install -d /usr/share/plasma/desktoptheme/Sweet
 cp -a "${WORKDIR}/Sweet/." /usr/share/plasma/desktoptheme/Sweet/
 
-echo "Installing Carl color scheme"
+echo "Installing Carl Plasma style as an optional alternative"
 
 git clone \
   --depth 1 \
   https://github.com/numbpill3d/kde-plasma-desktopthemes-carl.git \
-  "${WORKDIR}/Carl"
+  "${WORKDIR}/CarlRepo"
 
-install -d /usr/share/color-schemes
-
-CARL_FILE="$(find "${WORKDIR}/Carl" -type f -iname '*carl*.colors' | head -n 1)"
-
-if [[ -z "${CARL_FILE}" ]]; then
-  echo "Could not find the Carl color-scheme file"
+if [[ ! -d "${WORKDIR}/CarlRepo/Carl" ]]; then
+  echo "Carl Plasma theme directory was not found"
   exit 1
 fi
 
-install -m 0644 "${CARL_FILE}" /usr/share/color-schemes/Carl.colors
+install -d /usr/share/plasma/desktoptheme/Carl
+cp -a "${WORKDIR}/CarlRepo/Carl/." /usr/share/plasma/desktoptheme/Carl/
 
-echo "KDE themes installed successfully"
+echo "KDE Plasma themes installed successfully"
