@@ -3,7 +3,7 @@
 name: darkcache-laptop
 description: Fedora Kinoite image based on BlueBuild's base images with CachyOS kernel (Laptop)
 base-image: ghcr.io/blue-build/base-images/fedora-kinoite
-image-version: 43
+image-version: 44
 
 modules:
   # Install KDE themes
