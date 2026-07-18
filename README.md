@@ -2,7 +2,7 @@
 
 # DarkCache
 
-<img src="DarkCache.jpeg" alt="DarkCache icon" width="220">
+<img src="DarkCache.png" alt="DarkCache icon" width="220">
 
 </div>
 
