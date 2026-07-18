@@ -6,7 +6,6 @@
 
 </div>
 
-
 **DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and highly customized **KDE Plasma** experience.
 
 Built on Fedora Atomic technologies and powered by the **CachyOS kernel**, DarkCache combines performance-focused optimizations, useful desktop enhancements, curated packages, and a polished Plasma environment out of the box.
@@ -82,7 +81,6 @@ To keep DarkCache focused and reduce unnecessary clutter, the following packages
 - Elisa — replaced by Audacious
 - KHelpCenter
 - KWrite — replaced by Kate
-- Unnecessary GNOME applications and GNOME-specific components
 - Redundant utilities replaced by DarkCache preferred applications
 
 ### Desktop Customizations
@@ -111,7 +109,6 @@ Unlike minimal Atomic images, DarkCache ships with a carefully selected collecti
 2. Boot into a Fedora Atomic-based distribution.
 3. Switch to the latest DarkCache image:
 
-
 #### Standard desktop
 
 For desktop systems using AMD or Intel graphics:
@@ -139,7 +136,6 @@ bootc switch ghcr.io/sn0whax/darkcache-laptop:latest
 ```
 
 This variant includes laptop-specific power management, suspend behavior, and scheduler tuning.
-
 
 4. Reboot your system:
 
