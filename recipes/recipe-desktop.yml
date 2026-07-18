@@ -40,6 +40,10 @@ modules:
         - elisa-player
         - khelpcenter
         - kwrite
+        - kolourpaint
+        - skanpage
+        - krdc
+        - krfb
     install:
       skip-unavailable: true
       packages:
