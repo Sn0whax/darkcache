@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+set -u
+
+if [[ "${#}" -eq 0 ]]; then
+    echo "Usage: game-performance COMMAND [ARGUMENTS]" >&2
+    exit 2
+fi
+
+if ! command -v tuned-adm >/dev/null 2>&1; then
+    echo "TuneD is unavailable; launching without profile changes." >&2
+    exec "$@"
+fi
+
+AVAILABLE_PROFILES="$(tuned-adm list 2>/dev/null || true)"
+SELECTED_PROFILE=""
+
+for profile in \
+    accelerator-performance \
+    latency-performance \
+    throughput-performance
+do
+    if printf '%s\n' "${AVAILABLE_PROFILES}" |
+        grep -Fq "${profile}"
+    then
+        SELECTED_PROFILE="${profile}"
+        break
+    fi
+done
+
+if [[ -z "${SELECTED_PROFILE}" ]]; then
+    echo "No supported TuneD gaming profile is available." >&2
+    exec "$@"
+fi
+
+PREVIOUS_PROFILE="$(
+    tuned-adm active 2>/dev/null |
+    sed -n 's/^Current active profile: //p' |
+    head -n 1
+)"
+
+restore_profile() {
+    if [[ -n "${PREVIOUS_PROFILE}" ]]; then
+        echo "Restoring TuneD profile: ${PREVIOUS_PROFILE}"
+        tuned-adm profile "${PREVIOUS_PROFILE}" >/dev/null 2>&1 || true
+    fi
+}
+
+trap restore_profile EXIT HUP INT TERM
+
+echo "Using TuneD gaming profile: ${SELECTED_PROFILE}"
+
+if ! tuned-adm profile "${SELECTED_PROFILE}"; then
+    echo "Could not activate ${SELECTED_PROFILE}; launching normally." >&2
+    trap - EXIT HUP INT TERM
+    exec "$@"
+fi
+
+if [[ -n "${GAME_PERFORMANCE_SCREENSAVER_ON:-}" ]]; then
+    "$@"
+else
+    systemd-inhibit \
+        --why="DarkCache game-performance is running" \
+        --what=idle:sleep \
+        "$@"
+fi

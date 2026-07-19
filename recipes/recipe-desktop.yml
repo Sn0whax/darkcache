@@ -100,6 +100,11 @@ modules:
         - scx-tools
 
   # Needed services
+  # Configure game-performance to use TuneD
+  - type: script
+    scripts:
+      - install-game-performance-override.sh
+
   - type: systemd
     system:
       enabled:
