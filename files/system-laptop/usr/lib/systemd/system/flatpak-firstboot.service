@@ -7,7 +7,7 @@ ConditionPathExists=!/var/lib/darkcache/.flatpak-firstboot.done
 [Service]
 Type=oneshot
 ExecStartPre=/usr/bin/flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-ExecStart=/usr/bin/flatpak install -y --noninteractive --system flathub org.signal.Signal com.discordapp.Discord net.davidotek.pupgui2
+ExecStart=/usr/bin/flatpak install -y --noninteractive --system flathub org.signal.Signal com.discordapp.Discord net.davidotek.pupgui2 com.github.tchx84.Flatseal
 ExecStartPost=/usr/bin/mkdir -p /var/lib/darkcache
 ExecStartPost=/usr/bin/touch /var/lib/darkcache/.flatpak-firstboot.done
 RemainAfterExit=yes

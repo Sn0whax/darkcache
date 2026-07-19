@@ -51,37 +51,46 @@ DarkCache provides a curated desktop experience instead of a completely minimal 
 
 ### Added Packages
 
-DarkCache includes additional software and enhancements such as:
+The following base packages are installed by the standard desktop recipe:
 
-- gamemode
-- btop
-- brave-origin
-- faugus-launcher
-- lact
-- haruna
-- obs-studio
-- audacious
-- kate
-- steam
+- `iwd`
+- `NetworkManager`
+- `NetworkManager-wifi`
+- `plasma-nm`
+- `https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-3.0.2-1.x86_64.rpm`
+- `gamemode`
+- `btop`
+- `brave-origin`
+- `faugus-launcher`
+- `lact`
+- `haruna`
+- `obs-studio`
+- `audacious`
+- `kate`
+- `steam`
+- Flatseal (`com.github.tchx84.Flatseal`) — graphical Flatpak permission manager
 
 ### Removed Packages
 
-To keep DarkCache focused and reduce unnecessary clutter, the following packages are removed from all variants:
+The following base packages are removed by the standard desktop recipe:
 
-- Firefox and Firefox language packs — replaced by Brave Origin
-- Htop — replaced by Btop
-- Toolbox — DarkCache uses a Distrobox-first workflow
-- KolourPaint
-- Skanpage
-- KRDC
-- KRFB
-- KMahjongg
-- KMines
-- Dragon Player — replaced by Haruna
-- Elisa — replaced by Audacious
-- KHelpCenter
-- KWrite — replaced by Kate
-- Redundant utilities replaced by DarkCache preferred applications
+- `celluloid` — removed in favor of DarkCache's preferred media applications
+- `wpa_supplicant` — replaced by IWD for simpler Wi-Fi userspace, reduced external-library reliance, and potential battery-efficiency benefits
+- `firefox`
+- `firefox-langpacks`
+- `htop`
+- `nvtop`
+- `toolbox`
+- `kmahjongg`
+- `kmines`
+- `dragon`
+- `elisa-player`
+- `khelpcenter`
+- `kwrite`
+- `kolourpaint`
+- `skanpage`
+- `krdc`
+- `krfb`
 
 ### Desktop Customizations
 

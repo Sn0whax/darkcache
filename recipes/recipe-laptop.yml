@@ -29,6 +29,7 @@ modules:
     remove:
       auto-remove: true
       packages:
+        - celluloid
         - wpa_supplicant
         - firefox
         - firefox-langpacks
