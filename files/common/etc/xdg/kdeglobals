@@ -1,5 +1,5 @@
 [General]
-ColorScheme=BreezeDark
+ColorScheme=Carl
 
 [KDE]
-LookAndFeelPackage=org.kde.breeze.desktop
+LookAndFeelPackage=org.kde.breezedark.desktop
