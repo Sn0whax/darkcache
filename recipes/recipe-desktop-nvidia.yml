@@ -31,7 +31,6 @@ modules:
     remove:
       auto-remove: true
       packages:
-        - ufw
         - iwd
         - firefox
         - firefox-langpacks
@@ -112,7 +111,6 @@ modules:
   - type: systemd
     system:
       enabled:
-        - ufw.service
         - NetworkManager.service
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
