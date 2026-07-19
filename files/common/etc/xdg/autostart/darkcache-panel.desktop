@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Configure DarkCache Panel
+Comment=Configure the default DarkCache Plasma panel
+Exec=/usr/bin/darkcache-configure-panel
+OnlyShowIn=KDE;
+Terminal=false
+NoDisplay=true
+X-KDE-autostart-after=panel

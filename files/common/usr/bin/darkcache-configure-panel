@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MARKER="${HOME}/.config/darkcache/panel-configured"
+
+if [[ -f "${MARKER}" ]]; then
+    exit 0
+fi
+
+mkdir -p "$(dirname "${MARKER}")"
+
+sleep 8
+
+PLASMA_SCRIPT='
+const unwanted = [
+    "applications:systemsettings.desktop",
+    "applications:org.kde.systemsettings.desktop",
+    "applications:org.kde.discover.desktop"
+];
+
+const konsole = "applications:org.kde.konsole.desktop";
+
+for (const panel of panels()) {
+    for (const widget of panel.widgets()) {
+        if (
+            widget.type === "org.kde.plasma.icontasks" ||
+            widget.type === "org.kde.plasma.taskmanager"
+        ) {
+            widget.currentConfigGroup = ["General"];
+
+            const current = String(
+                widget.readConfig("launchers", "")
+            );
+
+            let launchers = current
+                .split(",")
+                .map(item => item.trim())
+                .filter(item => item.length > 0)
+                .filter(item => !unwanted.includes(item));
+
+            if (!launchers.includes(konsole)) {
+                launchers.push(konsole);
+            }
+
+            widget.writeConfig(
+                "launchers",
+                launchers.join(",")
+            );
+
+            widget.reloadConfig();
+        }
+    }
+}
+'
+
+qdbus6 \
+  org.kde.plasmashell \
+  /PlasmaShell \
+  org.kde.PlasmaShell.evaluateScript \
+  "${PLASMA_SCRIPT}"
+
+touch "${MARKER}"
