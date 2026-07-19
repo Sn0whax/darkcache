@@ -48,6 +48,10 @@ modules:
     install:
       skip-unavailable: true
       packages:
+        - NetworkManager
+        - NetworkManager-wifi
+        - plasma-nm
+        - https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-3.0.2-1.x86_64.rpm
         - gamemode
         - btop
         - brave-origin
@@ -95,6 +99,7 @@ modules:
   - type: systemd
     system:
       enabled:
+        - NetworkManager.service
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
         - flatpak-firstboot.service     # installs the default flatpaks
