@@ -31,7 +31,6 @@ modules:
     remove:
       auto-remove: true
       packages:
-        - iwd
         - firefox
         - firefox-langpacks
         - htop
@@ -50,6 +49,7 @@ modules:
     install:
       skip-unavailable: true
       packages:
+        - iwd
         - NetworkManager
         - NetworkManager-wifi
         - plasma-nm
