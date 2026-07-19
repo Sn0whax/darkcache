@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+WALLPAPER="/usr/share/wallpapers/DarkCache/contents/images/Space.jpeg"
+MARKER="${HOME}/.config/darkcache/wallpaper-configured"
+
+if [[ -f "${MARKER}" ]]; then
+    exit 0
+fi
+
+if [[ ! -f "${WALLPAPER}" ]]; then
+    exit 1
+fi
+
+mkdir -p "$(dirname "${MARKER}")"
+
+sleep 5
+
+plasma-apply-wallpaperimage \
+    --fill-mode preserveAspectCrop \
+    "${WALLPAPER}"
+
+touch "${MARKER}"

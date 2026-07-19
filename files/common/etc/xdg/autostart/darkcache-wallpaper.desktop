@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=DarkCache Default Wallpaper
+Comment=Apply the DarkCache wallpaper on first login
+Exec=/usr/bin/darkcache-set-default-wallpaper
+OnlyShowIn=KDE;
+Terminal=false
+NoDisplay=true
+X-KDE-autostart-after=panel
