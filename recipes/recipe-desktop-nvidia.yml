@@ -31,8 +31,6 @@ modules:
     remove:
       auto-remove: true
       packages:
-        - tuned
-        - tuned-ppd
         - firefox
         - firefox-langpacks
         - htop
@@ -106,8 +104,6 @@ modules:
   - type: systemd
     system:
       enabled:
-        - tuned.service
-        - tuned-ppd.service
         - NetworkManager.service
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
