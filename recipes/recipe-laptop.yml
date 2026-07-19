@@ -29,6 +29,7 @@ modules:
     remove:
       auto-remove: true
       packages:
+        - wpa_supplicant
         - firefox
         - firefox-langpacks
         - htop
