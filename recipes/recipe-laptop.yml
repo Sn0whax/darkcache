@@ -29,6 +29,7 @@ modules:
     remove:
       auto-remove: true
       packages:
+        - power-profiles-daemon
         - firefox
         - firefox-langpacks
         - htop
@@ -99,6 +100,7 @@ modules:
   - type: systemd
     system:
       enabled:
+        - power-profiles-daemon.service
         - NetworkManager.service
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
