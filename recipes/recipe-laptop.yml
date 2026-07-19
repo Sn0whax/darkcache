@@ -41,7 +41,6 @@ modules:
         - elisa-player
         - khelpcenter
         - kwrite
-
         - kolourpaint
         - skanpage
         - krdc
