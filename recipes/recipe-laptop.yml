@@ -102,7 +102,6 @@ modules:
   - type: script
     scripts:
       - install-game-performance-override.sh
-      - configure-ufw.sh
 
   - type: systemd
     system:
