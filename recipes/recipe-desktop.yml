@@ -43,6 +43,7 @@ modules:
         - kolourpaint
         - skanpage
         - krdc
+        - krfb
     install:
       skip-unavailable: true
       packages:
