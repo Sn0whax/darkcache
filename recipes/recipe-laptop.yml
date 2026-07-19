@@ -29,7 +29,8 @@ modules:
     remove:
       auto-remove: true
       packages:
-        - power-profiles-daemon
+        - tuned-ppd
+        - tuned
         - firefox
         - firefox-langpacks
         - htop
@@ -49,6 +50,8 @@ modules:
     install:
       skip-unavailable: true
       packages:
+        - tuned-ppd
+        - tuned
         - NetworkManager
         - NetworkManager-wifi
         - plasma-nm
@@ -88,10 +91,14 @@ modules:
         - bieszczaders/kernel-cachyos-addons
     remove:
       packages:
+        - tuned-ppd
+        - tuned
         - zram-generator-defaults
     install:
       skip-unavailable: true
       packages:
+        - tuned-ppd
+        - tuned
         - cachyos-settings
         - scx-scheds
         - scx-tools
@@ -100,7 +107,8 @@ modules:
   - type: systemd
     system:
       enabled:
-        - power-profiles-daemon.service
+        - tuned-ppd.service
+        - tuned.service
         - NetworkManager.service
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
