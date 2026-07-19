@@ -68,13 +68,14 @@ The following base packages are installed by the standard desktop recipe:
 - `audacious`
 - `kate`
 - `steam`
-- Flatseal (`com.github.tchx84.Flatseal`) — graphical Flatpak permission manager
+- `Flatseal`
+- `powertop`
 
 ### Removed Packages
 
 The following base packages are removed by the standard desktop recipe:
 
-- `celluloid` — removed in favor of DarkCache's preferred media applications
+- `celluloid`
 - `wpa_supplicant` — replaced by IWD for simpler Wi-Fi userspace, reduced external-library reliance, and potential battery-efficiency benefits
 - `firefox`
 - `firefox-langpacks`

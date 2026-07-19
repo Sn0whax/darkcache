@@ -49,6 +49,7 @@ modules:
     install:
       skip-unavailable: true
       packages:
+        - powertop
         - iwd
         - NetworkManager
         - NetworkManager-wifi
