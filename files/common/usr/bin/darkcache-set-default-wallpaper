@@ -3,22 +3,46 @@
 set -euo pipefail
 
 WALLPAPER="/usr/share/wallpapers/DarkCache/contents/images/Space.jpeg"
-MARKER="${HOME}/.config/darkcache/wallpaper-configured"
-
-if [[ -f "${MARKER}" ]]; then
-    exit 0
-fi
+WALLPAPER_URI="file://${WALLPAPER}"
+MARKER_DIRECTORY="${HOME}/.config/darkcache"
+DESKTOP_MARKER="${MARKER_DIRECTORY}/wallpaper-configured"
+LOCK_MARKER="${MARKER_DIRECTORY}/lockscreen-configured"
 
 if [[ ! -f "${WALLPAPER}" ]]; then
+    echo "DarkCache wallpaper was not found: ${WALLPAPER}" >&2
     exit 1
 fi
 
-mkdir -p "$(dirname "${MARKER}")"
+mkdir -p "${MARKER_DIRECTORY}"
 
-sleep 5
+if [[ ! -f "${LOCK_MARKER}" ]]; then
+    kwriteconfig6 \
+        --file kscreenlockerrc \
+        --group Greeter \
+        --group Wallpaper \
+        --group org.kde.image \
+        --group General \
+        --key Image \
+        "${WALLPAPER_URI}"
 
-plasma-apply-wallpaperimage \
-    --fill-mode preserveAspectCrop \
-    "${WALLPAPER}"
+    kwriteconfig6 \
+        --file kscreenlockerrc \
+        --group Greeter \
+        --group Wallpaper \
+        --group org.kde.image \
+        --group General \
+        --key PreviewImage \
+        "${WALLPAPER_URI}"
 
-touch "${MARKER}"
+    touch "${LOCK_MARKER}"
+fi
+
+if [[ ! -f "${DESKTOP_MARKER}" ]]; then
+    sleep 5
+
+    plasma-apply-wallpaperimage \
+        --fill-mode preserveAspectCrop \
+        "${WALLPAPER}"
+
+    touch "${DESKTOP_MARKER}"
+fi
