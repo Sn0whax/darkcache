@@ -121,6 +121,6 @@ modules:
       ID: darkcache
       ID_LIKE: fedora
       NAME: DarkCache
-      PRETTY_NAME: DarkCache - Fedora Silverblue with CachyOS Kernel (Laptop)
+      PRETTY_NAME: DarkCache - Fedora Kinoite with CachyOS Kernel (Laptop)
 
   - type: signing

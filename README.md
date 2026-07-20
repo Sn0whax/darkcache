@@ -38,7 +38,7 @@ Designed for desktops, gaming systems, and workstations using NVIDIA graphics.
 
 Optimized for laptops and portable devices.
 
-- Uses the `scx_bpfland` scheduler in power-saving mode by default
+- Uses `scx_bpfland` in Auto mode to align with the TuneD setting
 - Improved battery life and responsiveness
 - Better suspend and docked-device behavior
 - CachyOS kernel and performance optimizations
@@ -98,10 +98,8 @@ The following base packages are removed by the standard desktop recipe:
 DarkCache comes preconfigured with:
 
 - Custom Plasma theme
-- Custom icon theme
 - Custom cursor theme
 - Custom SDDM login theme
-- Improved panel layout
 - Sensible KDE defaults
 - Performance-oriented system tuning
 - NVIDIA support on desktop images
@@ -109,9 +107,9 @@ DarkCache comes preconfigured with:
 
 ## Philosophy
 
-DarkCache aims to deliver a complete KDE Plasma experience while preserving the reliability and simplicity of Fedora Atomic desktops.
+DarkCache aims to deliver a complete KDE Plasma experience while preserving the reliability and simplicity of Fedora Atomic desktops, combined with the speed of the CachyOS kernel and SCX schedulers.
 
-Unlike minimal Atomic images, DarkCache ships with a carefully selected collection of applications, themes, and customizations so users can start working, or gaming immediately without spending hours setting up their environment.
+Unlike other Atomic images, DarkCache applies minor debloating and then adds a carefully selected collection of applications, themes, and customizations so users can start working or gaming immediately without spending hours setting up their environment.
 
 ## Installation
 
