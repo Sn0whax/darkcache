@@ -127,7 +127,7 @@ modules:
       ID: darkcache
       ID_LIKE: fedora
       NAME: DarkCache
-      PRETTY_NAME: DarkCache - Fedora Kinoite with CachyOS Kernel (Desktop)
+      PRETTY_NAME: DarkCache Desktop Nvidia
 
   # Sign container image
   - type: signing
