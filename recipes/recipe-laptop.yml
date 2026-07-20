@@ -29,6 +29,7 @@ modules:
     remove:
       auto-remove: true
       packages:
+        - fcitx5
         - celluloid
         - wpa_supplicant
         - firefox
