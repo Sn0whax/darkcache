@@ -33,7 +33,6 @@ modules:
       packages:
         - fcitx5
         - celluloid
-        - wpa_supplicant
         - firefox
         - firefox-langpacks
         - htop
@@ -53,9 +52,6 @@ modules:
       skip-unavailable: true
       packages:
         - powertop
-        - iwd
-        - NetworkManager
-        - NetworkManager-wifi
         - plasma-nm
         - https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-3.0.2-1.x86_64.rpm
         - gamemode

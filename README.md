@@ -55,9 +55,6 @@ DarkCache provides a curated desktop experience instead of a completely minimal 
 
 The following base packages are installed by the standard desktop recipe:
 
-- `iwd`
-- `NetworkManager`
-- `NetworkManager-wifi`
 - `plasma-nm`
 - `https://github.com/sigstore/cosign/releases/download/v3.0.2/cosign-3.0.2-1.x86_64.rpm`
 - `gamemode`
@@ -78,7 +75,6 @@ The following base packages are installed by the standard desktop recipe:
 The following base packages are removed by the standard desktop recipe:
 
 - `celluloid`
-- `wpa_supplicant` — replaced by IWD for simpler Wi-Fi userspace, reduced external-library reliance, and potential battery-efficiency benefits
 - `firefox`
 - `firefox-langpacks`
 - `htop`
