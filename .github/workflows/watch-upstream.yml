@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   watch:
-    name: Check fedora-silverblue upstream digest
+    name: Check Fedora Kinoite upstream digest
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
       - name: Fetch current upstream image digest (REAL latest)
         id: cur
         run: |
-          cur=$(skopeo inspect docker://ghcr.io/blue-build/base-images/fedora-silverblue:latest \
+          cur=$(skopeo inspect docker://ghcr.io/blue-build/base-images/fedora-kinoite:44 \
             --format '{{.Digest}}')
           echo "cur=$cur" >> $GITHUB_OUTPUT
 
@@ -53,7 +53,7 @@ jobs:
       - name: Commit updated digest
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: "chore(upstream): bump fedora-silverblue digest"
+          commit_message: "chore(upstream): bump fedora-kinoite digest"
           file_pattern: .upstream-digest
           commit_user_name: upstream-watcher
           commit_user_email: upstream-watcher@users.noreply.github.com
