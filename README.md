@@ -6,9 +6,11 @@
 
 </div>
 
-**DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, designed for users who want a fast, modern, and highly customized **KDE Plasma** experience.
+**DarkCache** is an atomic Fedora-based desktop image built with BlueBuild, providing an immutable, image-based operating system with a fast, modern, and lightly customized **KDE Plasma** environment.
 
-Built on Fedora Atomic technologies and powered by the **CachyOS kernel**, DarkCache combines performance-focused optimizations, useful desktop enhancements, curated packages, and a polished Plasma environment out of the box.
+Powered by the **CachyOS** kernel, it integrates performance-focused optimizations, curated packages, practical desktop enhancements, and a polished Plasma configuration that is ready to use out of the box.
+
+With DarkCache you get **Immutability + Security + Performance**
 
 ## Variants
 
