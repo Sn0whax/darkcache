@@ -74,6 +74,14 @@ modules:
       - 'grep -E "^audio:" /usr/lib/group >> /etc/group'
 
   # Cachyos kernel
+  # BEGIN DarkCache dated PRETTY_NAME
+  - type: script
+    snippets:
+      - |
+        BUILD_DATE="$(date -u +%Y%m%d)"
+        sed -i 's|^PRETTY_NAME=.*|PRETTY_NAME="DarkCache Desktop Nvidia ('"${BUILD_DATE}"')"|' /usr/lib/os-release
+
+  # END DarkCache dated PRETTY_NAME
   - type: custom-kernel
     source: local
     kernel: cachyos
