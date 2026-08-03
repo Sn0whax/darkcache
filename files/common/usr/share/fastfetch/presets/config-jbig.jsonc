@@ -1,0 +1,111 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "/usr/share/fastfetch/ascii-artbig.txt",
+    "padding": {
+      "top": 1
+    }
+  },
+  "display": {
+    "bar": {
+      "border": {
+        "left": "",
+        "leftElapsed": "",
+        "right": "",
+        "rightElapsed": ""
+      },
+      "char": {
+        "total": "",
+        "elapsed": ""
+      },
+      "color": {
+        "total": null
+      }
+    },
+    "percent": {
+      "type": [
+        "bar",
+        "bar-monochrome"
+      ]
+    }
+  },
+  "modules": [
+    "break",
+    "title",
+    {
+      "type": "os",
+      "key": "OS "
+    },
+    {
+      "type": "kernel",
+      "key": "KNL"
+    },
+    {
+      "type": "uptime",
+      "key": "UPT"
+    },
+    "break",
+    {
+      "type": "shell",
+      "key": "SHL"
+    },
+    {
+      "type": "terminal",
+      "key": "TER"
+    },
+    {
+      "type": "de",
+      "key": "DE "
+    },
+    {
+      "type": "wm",
+      "key": "WM "
+    },
+    {
+      "type": "battery",
+      "key": "BAT"
+    },
+    "break",
+    {
+      "type": "command",
+      "key": "CPU",
+      "text": "model=$(lscpu 2>/dev/null | sed -n 's/^Model name:[[:space:]]*//p' | head -n1)\nmodel=$(printf '%s' \"$model\" | sed -E 's/^[0-9]+(st|nd|rd|th) Gen Intel\\(R\\) Core\\(TM\\) /Intel /; s/Intel\\(R\\) Core\\(TM\\) /Intel /; s/[[:space:]]+CPU[[:space:]]+//; s/[[:space:]]+@.*$//')\nmax_khz=\"\"\nfor policy in /sys/devices/system/cpu/cpufreq/policy*; do\n    [ -r \"$policy/cpuinfo_max_freq\" ] || continue\n    value=$(cat \"$policy/cpuinfo_max_freq\" 2>/dev/null)\n    [ -n \"$value\" ] && { max_khz=\"$value\"; break; }\ndone\nif [ -z \"$max_khz\" ]; then\n    max_mhz=$(lscpu 2>/dev/null | sed -n 's/^CPU max MHz:[[:space:]]*//p' | head -n1)\n    if [ -n \"$max_mhz\" ]; then max_khz=$(awk -v mhz=\"$max_mhz\" 'BEGIN { printf \"%.0f\", mhz * 1000 }'); fi\nfi\nif [ -n \"$max_khz\" ]; then\n    freq=$(awk -v khz=\"$max_khz\" 'BEGIN { printf \"%.2f GHz\", khz / 1000000 }')\n    printf '%s @ %s' \"$model\" \"$freq\"\nelse\n    printf '%s' \"$model\"\nfi"
+    },
+    {
+      "type": "command",
+      "key": "GPU",
+      "text": "name=$(lspci 2>/dev/null | sed -nE \"/VGA compatible controller|3D controller|Display controller/{s/^.*(VGA compatible controller|3D controller|Display controller):[[:space:]]*//;p;q;}\"); if printf \"%s\" \"$name\" | grep -qi \"^NVIDIA Corporation\"; then model=$(printf \"%s\" \"$name\" | sed -nE \"s/^NVIDIA Corporation.*\\[([^]]+)\\].*$/\\1/p\"); [ -z \"$model\" ] && model=$(printf \"%s\" \"$name\" | sed -E \"s/^NVIDIA Corporation[[:space:]]*//I\"); name=\"Nvidia $model\"; else name=$(printf \"%s\" \"$name\" | sed -E \"s/^[^[:space:]]+[[:space:]]+Corporation[[:space:]]+//I; s/[[:space:]]+Series([[:space:]]+Graphics([[:space:]]*&[[:space:]]*Display)?)?//I; s/[[:space:]]+(Integrated[[:space:]]+)?Graphics([[:space:]]*&[[:space:]]*Display)?//I; s/[[:space:]]+Display//I; s/[[:space:]]+$//\"); fi; if [ -n \"$name\" ]; then printf \"%.42s\" \"$name\"; else printf \"GPU unavailable\"; fi"
+    },
+    {
+      "type": "memory",
+      "key": "MEM"
+    },
+    {
+      "type": "swap",
+      "key": "SWP"
+    },
+    {
+      "type": "disk",
+      "folders": "/",
+      "key": "DSK"
+    },
+    {
+      "type": "command",
+      "key": "SEC",
+      "text": "items=\"\"; add(){ [ -z \"$items\" ] && items=\"$1\" || items=\"$items  $1\"; }; command -v aa-enabled >/dev/null 2>&1 && aa-enabled >/dev/null 2>&1 && add \"AppArmor\"; if command -v getenforce >/dev/null 2>&1; then s=$(getenforce 2>/dev/null); [ \"$s\" = Enforcing ] && add \"SELinux\" || { [ \"$s\" = Permissive ] && add \"SELinux (Permissive)\"; }; elif [ -r /sys/fs/selinux/enforce ]; then [ \"$(cat /sys/fs/selinux/enforce 2>/dev/null)\" = 1 ] && add \"SELinux\"; fi; if systemctl is-active --quiet ufw.service 2>/dev/null || grep -q \"^ENABLED=yes\" /etc/ufw/ufw.conf 2>/dev/null; then add \"UFW\"; elif systemctl is-active --quiet firewalld.service 2>/dev/null; then add \"firewalld\"; elif systemctl is-active --quiet nftables.service 2>/dev/null || sudo -n nft list ruleset 2>/dev/null | grep -qE \"^[[:space:]]*(table|chain)[[:space:]]\"; then add \"nftables\"; elif systemctl is-active --quiet iptables.service 2>/dev/null || systemctl is-active --quiet ip6tables.service 2>/dev/null; then add \"iptables\"; fi; sb=0; command -v mokutil >/dev/null 2>&1 && mokutil --sb-state 2>/dev/null | grep -qi \"SecureBoot enabled\" && sb=1; if [ \"$sb\" = 0 ]; then for v in /sys/firmware/efi/efivars/SecureBoot-*; do [ -r \"$v\" ] && [ \"$(od -An -t u1 -j 4 -N 1 \"$v\" 2>/dev/null | tr -d \" \")\" = 1 ] && sb=1; break; done; fi; [ \"$sb\" = 1 ] && add \"Secure Boot\"; printf \"%s\" \"${items:-None detected}\""
+    },
+    "break",
+    {
+      "type": "display",
+      "key": "SCN",
+      "format": "{width}x{height} @ {refresh-rate} Hz ({inch} inch)"
+    },
+    {
+      "type": "media",
+      "key": "MUS",
+      "format": "{combined:42}"
+    },
+    "break"
+  ]
+}

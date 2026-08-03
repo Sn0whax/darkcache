@@ -1,0 +1,85 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "/usr/share/fastfetch/ascii-artsmall.txt",
+    "padding": {
+      "top": 1
+    }
+  },
+  "display": {
+    "separator": "  ",
+    "key": {
+      "type": "string"
+    },
+    "bar": {
+      "border": {
+        "left": "",
+        "leftElapsed": "",
+        "right": "",
+        "rightElapsed": ""
+      },
+      "char": {
+        "total": "",
+        "elapsed": ""
+      },
+      "color": {
+        "total": null
+      }
+    },
+    "percent": {
+      "type": [
+        "bar",
+        "bar-monochrome"
+      ]
+    }
+  },
+  "modules": [
+    {
+      "type": "command",
+      "key": "USR",
+      "text": "user=${USER:-$(id -un)}; host=$(hostname 2>/dev/null); total=$(cut -d. -f1 /proc/uptime 2>/dev/null); total=${total:-0}; days=$((total / 86400)); hours=$(((total % 86400) / 3600)); minutes=$(((total % 3600) / 60)); if [ \"$days\" -gt 0 ]; then printf '%s@%s - %dd%dh%dm' \"$user\" \"$host\" \"$days\" \"$hours\" \"$minutes\"; else printf '%s@%s - %dh%dm' \"$user\" \"$host\" \"$hours\" \"$minutes\"; fi"
+    },
+    {
+      "type": "os",
+      "key": "OS "
+    },
+    {
+      "type": "kernel",
+      "key": "KNL"
+    },
+    {
+      "type": "command",
+      "key": "UI ",
+      "text": "shell=$(basename \"${SHELL:-sh}\")\ncase \"$shell\" in\n    fish) shell=\"Fish\" ;;\n    bash) shell=\"Bash\" ;;\n    zsh) shell=\"Zsh\" ;;\n    nu) shell=\"Nushell\" ;;\nesac\n\nif [ -n \"$KITTY_PID\" ]; then\n    terminal=\"kitty\"\nelif [ -n \"$KONSOLE_VERSION\" ]; then\n    terminal=\"Konsole\"\nelif [ -n \"$WEZTERM_PANE\" ]; then\n    terminal=\"WezTerm\"\nelif [ -n \"$ALACRITTY_SOCKET\" ] || [ \"$TERM\" = \"alacritty\" ]; then\n    terminal=\"Alacritty\"\nelif [ -n \"$GHOSTTY_RESOURCES_DIR\" ] || [ \"$TERM_PROGRAM\" = \"ghostty\" ]; then\n    terminal=\"Ghostty\"\nelif [ -n \"$TERM_PROGRAM\" ]; then\n    terminal=\"$TERM_PROGRAM\"\nelse\n    terminal=$(ps -o comm= -p \"$PPID\" 2>/dev/null | sed 's/^-//')\n    terminal=${terminal:-Terminal}\nfi\n\ndesktop=${XDG_CURRENT_DESKTOP:-${DESKTOP_SESSION:-Unknown}}\ncase \"$desktop\" in\n    *KDE*|*Plasma*|plasma*) desktop=\"Plasma\" ;;\n    *GNOME*|gnome*) desktop=\"GNOME\" ;;\n    *XFCE*|xfce*) desktop=\"XFCE\" ;;\n    *Cinnamon*|cinnamon*) desktop=\"Cinnamon\" ;;\n    *MATE*|mate*) desktop=\"MATE\" ;;\n    *Hyprland*|hyprland*) desktop=\"Hyprland\" ;;\n    *Sway*|sway*) desktop=\"Sway\" ;;\n    *LXQt*|lxqt*) desktop=\"LXQt\" ;;\nesac\n\n\nprintf '%s/%s on %s' \"$shell\" \"$terminal\" \"$desktop\""
+    },
+    {
+      "type": "command",
+      "key": "CPU",
+      "text": "model=$(lscpu 2>/dev/null | sed -n 's/^Model name:[[:space:]]*//p' | head -n1)\nmodel=$(printf '%s' \"$model\" | sed -E 's/^[0-9]+(st|nd|rd|th) Gen Intel\\(R\\) Core\\(TM\\) /Intel /; s/Intel\\(R\\) Core\\(TM\\) /Intel /; s/[[:space:]]+CPU[[:space:]]+//; s/[[:space:]]+@.*$//')\nmax_khz=\"\"\nfor policy in /sys/devices/system/cpu/cpufreq/policy*; do\n    [ -r \"$policy/cpuinfo_max_freq\" ] || continue\n    value=$(cat \"$policy/cpuinfo_max_freq\" 2>/dev/null)\n    [ -n \"$value\" ] && { max_khz=\"$value\"; break; }\ndone\nif [ -z \"$max_khz\" ]; then\n    max_mhz=$(lscpu 2>/dev/null | sed -n 's/^CPU max MHz:[[:space:]]*//p' | head -n1)\n    if [ -n \"$max_mhz\" ]; then max_khz=$(awk -v mhz=\"$max_mhz\" 'BEGIN { printf \"%.0f\", mhz * 1000 }'); fi\nfi\nif [ -n \"$max_khz\" ]; then\n    freq=$(awk -v khz=\"$max_khz\" 'BEGIN { printf \"%.2f GHz\", khz / 1000000 }')\n    printf '%s @ %s' \"$model\" \"$freq\"\nelse\n    printf '%s' \"$model\"\nfi"
+    },
+    {
+      "type": "command",
+      "key": "GPU",
+      "text": "raw=$(LC_ALL=C lspci 2>/dev/null | sed -nE \"/(VGA compatible|3D|Display) controller/{s/^.*controller:[[:space:]]*//;p;q;}\"); if printf \"%s\" \"$raw\" | grep -qi \"^NVIDIA Corporation\"; then model=$(printf \"%s\" \"$raw\" | sed -nE \"s/^NVIDIA Corporation.*\\[([^]]+)\\].*$/\\1/p\"); [ -n \"$model\" ] && name=\"Nvidia $model\" || name=$(printf \"%s\" \"$raw\" | sed -E \"s/^NVIDIA Corporation[[:space:]]*/Nvidia /I\"); else name=$(printf \"%s\" \"$raw\" | sed -E \"s/^(Intel|AMD|Advanced Micro Devices)[[:space:]]+Corporation[[:space:]]+//I; s/[[:space:]]+Series//Ig; s/[[:space:]]+(Integrated[[:space:]]+)?Graphics//Ig; s/[[:space:]]*&[[:space:]]*Display//Ig; s/[[:space:]]+Display//Ig; s/[[:space:]]+/ /g; s/^[[:space:]]+//; s/[[:space:]]+$//\"); fi; [ -n \"$name\" ] && printf \"%.42s\" \"$name\" || printf \"GPU unavailable\""
+    },
+    {
+      "type": "memory",
+      "key": "MEM"
+    },
+    {
+      "type": "disk",
+      "folders": "/",
+      "key": "DSK"
+    },
+    {
+      "type": "battery",
+      "key": "BAT"
+    },
+    {
+      "type": "command",
+      "key": "SEC",
+      "text": "items=\"\"\nadd_item() {\n    if [ -z \"$items\" ]; then items=\"$1\"; else items=\"$items  $1\"; fi\n}\n\n# Linux security modules: report only active/enforcing systems.\nif command -v aa-enabled >/dev/null 2>&1 && aa-enabled >/dev/null 2>&1; then\n    add_item \"AppArmor\"\nfi\nif command -v getenforce >/dev/null 2>&1; then\n    selinux_state=$(getenforce 2>/dev/null)\n    case \"$selinux_state\" in\n        Enforcing) add_item \"SELinux\" ;;\n        Permissive) add_item \"SELinux (Permissive)\" ;;\n    esac\nelif [ -r /sys/fs/selinux/enforce ]; then\n    selinux_state=$(cat /sys/fs/selinux/enforce 2>/dev/null)\n    if [ \"$selinux_state\" = \"1\" ]; then add_item \"SELinux\"; else add_item \"SELinux (Permissive)\"; fi\nfi\n\n# Firewall front ends/services. Prefer specific names when detectable.\nfirewall_found=0\nif command -v ufw >/dev/null 2>&1; then\n    if ufw status 2>/dev/null | grep -qi '^Status: active' || \\\n       systemctl is-active --quiet ufw.service 2>/dev/null || \\\n       systemctl is-enabled --quiet ufw.service 2>/dev/null || \\\n       grep -q '^ENABLED=yes' /etc/ufw/ufw.conf 2>/dev/null; then\n        add_item \"UFW\"\n        firewall_found=1\n    fi\nfi\nif command -v firewall-cmd >/dev/null 2>&1; then\n    if firewall-cmd --state 2>/dev/null | grep -qx running || \\\n       systemctl is-active --quiet firewalld.service 2>/dev/null || \\\n       systemctl is-enabled --quiet firewalld.service 2>/dev/null; then\n        add_item \"firewalld\"\n        firewall_found=1\n    fi\nfi\nif command -v nft >/dev/null 2>&1; then\n    if systemctl is-active --quiet nftables.service 2>/dev/null || \\\n       systemctl is-enabled --quiet nftables.service 2>/dev/null || \\\n       nft list ruleset 2>/dev/null | grep -qE '^[[:space:]]*(table|chain)[[:space:]]'; then\n        add_item \"nftables\"\n        firewall_found=1\n    fi\nfi\nif [ \"$firewall_found\" = \"0\" ] && command -v iptables >/dev/null 2>&1; then\n    if systemctl is-active --quiet iptables.service 2>/dev/null || \\\n       systemctl is-enabled --quiet iptables.service 2>/dev/null || \\\n       iptables -S 2>/dev/null | grep -qEv '^-P (INPUT|FORWARD|OUTPUT) ACCEPT$'; then\n        add_item \"iptables\"\n    fi\nfi\n\n# Secure Boot: use mokutil first, then read the UEFI SecureBoot variable.\nsecure_boot=0\nif command -v mokutil >/dev/null 2>&1 && mokutil --sb-state 2>/dev/null | grep -qi 'SecureBoot enabled'; then\n    secure_boot=1\nelse\n    set -- /sys/firmware/efi/efivars/SecureBoot-*\n    if [ -e \"$1\" ]; then\n        sb_value=$(od -An -t u1 -j 4 -N 1 \"$1\" 2>/dev/null | tr -d ' ')\n        [ \"$sb_value\" = \"1\" ] && secure_boot=1\n    fi\nfi\n[ \"$secure_boot\" = \"1\" ] && add_item \"Secure Boot\"\n\nif [ -n \"$items\" ]; then printf '%s' \"$items\"; else printf 'None detected'; fi"
+    }
+  ]
+}
