@@ -12,6 +12,21 @@ Powered by the **CachyOS** kernel, it integrates performance-focused optimizatio
 
 With DarkCache you get **Immutability + Security + Performance**
 
+## Why DarkCache?
+
+- KDE Plasma-first experience
+- SELinux Security
+- Clang ThinLTO-optimized CachyOS kernel across all images
+- CachyOS-Settings tuning (sysctl, udev, ZRAM, I/O schedulers) applied out of the box
+- CachyOS performance enhancements
+- NVIDIA-ready desktop images
+- Atomic reliability powered by BlueBuild
+- Beautiful themes and visual customization
+- Curated package selection without unnecessary bloat
+- Built for gaming and everyday use
+- Distrobox-first workflow
+- Sensible defaults with room for customization
+
 ## Variants
 
 ### darkcache-desktop
@@ -168,19 +183,6 @@ To verify an image signature, download the `cosign.pub` key from this repository
 ```bash
 cosign verify --key cosign.pub ghcr.io/sn0whax/darkcache-desktop
 ```
-
-## Why DarkCache?
-
-- KDE Plasma-first experience
-- SELinux Security
-- CachyOS performance enhancements
-- NVIDIA-ready desktop images
-- Atomic reliability powered by BlueBuild
-- Beautiful themes and visual customization
-- Curated package selection without unnecessary bloat
-- Built for gaming and everyday use
-- Distrobox-first workflow
-- Sensible defaults with room for customization
 
 ---
 
