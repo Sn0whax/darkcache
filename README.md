@@ -69,6 +69,7 @@ The following base packages are installed by the standard desktop recipe:
 - `steam`
 - `Flatseal`
 - `powertop`
+- `fastfetch`
 
 ### Removed Packages
 
