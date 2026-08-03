@@ -75,7 +75,7 @@ modules:
   # END DarkCache dated PRETTY_NAME
   - type: custom-kernel
     source: local
-    kernel: cachyos
+    kernel: cachyos-lto
     initramfs: true
     sign: 
       key: /tmp/certs/MOK.priv
