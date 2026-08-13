@@ -118,7 +118,6 @@ modules:
         - lactd.service
         - podman.socket                 # needed for flatpaks to access toolbox containers
         - flatpak-firstboot.service     # installs the default flatpaks
-        - scx_loader.service            # enables scxsched
 
   # Set OS name
   - type: os-release
