@@ -104,6 +104,7 @@ modules:
     remove:
       packages:
         - zram-generator-defaults
+        - systemd-oomd-defaults
     install:
       skip-unavailable: true
       packages:
