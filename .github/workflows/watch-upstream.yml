@@ -33,7 +33,7 @@ jobs:
       - name: Fetch current upstream image digest (REAL latest)
         id: cur
         run: |
-          cur=$(skopeo inspect docker://ghcr.io/blue-build/base-images/fedora-kinoite:44 \
+          cur=$(skopeo inspect docker://ghcr.io/blue-build/base-images/fedora-kinoite:45 \
             --format '{{.Digest}}')
           echo "cur=$cur" >> $GITHUB_OUTPUT
 
